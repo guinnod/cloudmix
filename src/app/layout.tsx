@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { inter } from "@/styles/fonts";
 import clsx from "clsx";
+import { Header } from "@/modules/Header";
 
 export const metadata: Metadata = {
     title: "CloudMix",
@@ -15,7 +16,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={clsx(inter.className)}>{children}</body>
+            <body className={clsx(inter.className, "text-black-custom")}>
+                <Header />
+                {children}
+            </body>
         </html>
     );
 }

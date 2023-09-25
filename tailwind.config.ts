@@ -5,20 +5,19 @@ const config: Config = {
     theme: {
         extend: {},
         colors: {
-            colors: {
-                primary: "#9969FF",
-                white: {
-                    default: "#FFFFFF",
-                    ghost: "#FBFBFB",
-                },
-                black: {
-                    default: "#000000",
-                    custom: "#180A29",
-                },
-                gray: {
-                    custom: "#F2F1F4",
-                    cloud: "#EDEBEF",
-                },
+            primary: "#9969FF",
+            white: {
+                default: "#FFFFFF",
+                ghost: "#FBFBFB",
+            },
+            black: {
+                default: "#000000",
+                custom: "#180A29",
+            },
+            gray: {
+                custom: "#F2F1F4",
+                cloud: "#EDEBEF",
+                coin: "#9AACB5",
             },
         },
     },
