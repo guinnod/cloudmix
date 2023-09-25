@@ -5,7 +5,7 @@ import { MessagesList } from "./ui/MessagesList";
 
 export const ChatWindow = () => {
     return (
-        <main className="w-full h-full flex-col justify-between">
+        <main className="w-full h-full flex flex-col justify-between">
             <ChatHeader />
             <MessagesList />
             <MessageComposer />

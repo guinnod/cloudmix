@@ -72,7 +72,7 @@ export const Login = () => {
                         href="/register"
                         className="!p-0 !text-primary w-full"
                     >
-                        Don't have an account? Register here
+                        Don&apos;t have an account? Register here
                     </Link>
                 </Form>
             </div>

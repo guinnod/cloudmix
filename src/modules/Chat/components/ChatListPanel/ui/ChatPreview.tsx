@@ -4,13 +4,14 @@ export const ChatPreview = () => {
     return (
         <div
             className={clsx(
-                "h-24 flex gap-4 px-10 items-center justify-between",
-                "border-b border-opacity-50 border-gray-coin"
+                "max-sm:h-16 h-24 flex gap-4 px-5 sm:px-10 items-center justify-between",
+                "border-b border-opacity-50 border-gray-coin",
+                "w-full"
             )}
         >
-            <div>
+            <div className="w-full">
                 <h3 className="font-medium text-lg">Aslan</h3>
-                <p className="opacity-50 whitespace-nowrap overflow-hidden overflow-ellipsis w-64">
+                <p className="opacity-50 whitespace-nowrap overflow-hidden overflow-ellipsis w-full">
                     Hi, how is going now? Hi, how is going now?Hi, how is going
                     now?
                 </p>

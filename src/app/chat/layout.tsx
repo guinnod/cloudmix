@@ -10,9 +10,11 @@ export default function ChatLayout({
     return (
         <div className={clsx("h-screen w-screen fixed top-0 left-0")}>
             <Header />
-            <div className="flex h-[calc(100vh-6rem)]">
+            <div className="flex max-sm:h-[calc(100vh-4rem)] h-[calc(100vh-6rem)]">
                 <ChatListPanel />
-                <div className="overflow-y-scroll w-full">{children}</div>
+                <div className="overflow-y-scroll w-full max-md:hidden">
+                    {children}
+                </div>
             </div>
         </div>
     );

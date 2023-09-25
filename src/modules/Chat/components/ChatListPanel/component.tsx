@@ -8,11 +8,11 @@ export const ChatListPanel = () => {
         <nav
             className={clsx(
                 "border-r border-opacity-50 border-gray-coin",
-                "h-full"
+                "h-full max-w-sm max-[384px]:w-full"
             )}
         >
             <ChatListHeader />
-            <ul className="max-h-[calc(100%-6rem)] overflow-y-scroll">
+            <ul className="max-sm:max-h-[calc(100%-4rem)] max-h-[calc(100%-6rem)] overflow-y-scroll">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((e, key) => (
                     <li
                         key={key}

@@ -16,8 +16,17 @@ export const ChatBotCard: FC<ChatBot> = ({
 }) => {
     return (
         <Card
-            style={{ width: 300 }}
-            cover={<Image alt="banner" src={banner} width={300} height={200} />}
+            // style={{ width: 280 }}
+            className="w-[280px] max-sm:max-w-[90vw]"
+            cover={
+                <Image
+                    alt="banner"
+                    src={banner}
+                    width={250}
+                    height={170}
+                    className="w-full aspect-[5/3]"
+                />
+            }
             actions={[
                 <div className="flex justify-center" key="create">
                     <Link href={link} className="max-w-max">

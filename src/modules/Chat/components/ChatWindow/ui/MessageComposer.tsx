@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const MessageComposer = () => {
     return (
-        <div className="h-16 px-8 flex justify-between items-center">
+        <div className="px-4 sm:px-8 max-sm:py-3 py-5 flex gap-4 justify-between items-center">
             <ConfigProvider
                 theme={{
                     token: {
@@ -12,7 +12,12 @@ export const MessageComposer = () => {
                     },
                 }}
             >
-                <Input bordered={false} placeholder="Write message..." />
+                <Input.TextArea
+                    bordered={false}
+                    placeholder="Write message..."
+                    autoSize={{ minRows: 1, maxRows: 6 }}
+                    rows={1}
+                />
             </ConfigProvider>
 
             <button>
