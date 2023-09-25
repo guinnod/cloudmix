@@ -5,3 +5,15 @@
 .line-height-lg {
     line-height: 28px;
 }
+
+::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fbfbfb;
+}
+
+::-webkit-scrollbar-track {
+    background: #f2f1f4;
+}

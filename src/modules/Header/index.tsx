@@ -23,7 +23,7 @@ export const Header = () => {
                 </Link>
             </div>
             <div>
-                <p className="font-medium text-lg">Samurai Meow</p>
+                <h2 className="font-medium text-lg">Samurai Meow</h2>
                 <Link href="/logout" className="opacity-50 line-height-lg">
                     Logout
                 </Link>
