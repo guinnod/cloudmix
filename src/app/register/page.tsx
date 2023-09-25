@@ -1,5 +1,5 @@
-import { Login } from "@/modules/Auth/components/Login/component";
+import { Register } from "@/modules/Auth/components/Register/component";
 
 export default function RegisterPage() {
-    return <Login />;
+    return <Register />;
 }

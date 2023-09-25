@@ -8,9 +8,9 @@ import { useLogin } from "./hooks/useLogin";
 export const Login = () => {
     const { formik, loading } = useLogin();
     return (
-        <main className="flex flex-col h-full justify-center gap-10 items-center">
+        <main className="flex flex-col h-full justify-center gap-10 items-center px-5">
             <Logo />
-            <div className="w-full max-w-sm">
+            <div className="w-full max-w-xs sm:max-w-sm">
                 <Form
                     onFinish={formik.submitForm}
                     className="flex flex-col items-center gap-2 w-full px-10"
@@ -68,16 +68,12 @@ export const Login = () => {
                             Log in
                         </Button>
                     </Form.Item>
-                    <div className="w-full">
-                        <Link href="/register">
-                            <Button
-                                type="link"
-                                className="!p-0 whitespace-break-spaces !text-primary"
-                            >
-                                Don't have an account? Register here
-                            </Button>
-                        </Link>
-                    </div>
+                    <Link
+                        href="/register"
+                        className="!p-0 !text-primary w-full"
+                    >
+                        Don't have an account? Register here
+                    </Link>
                 </Form>
             </div>
         </main>
