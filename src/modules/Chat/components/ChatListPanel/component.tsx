@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { ChatPreview } from "./ui/ChatPreview";
+import { ChatListHeader } from "./ui/ChatListHeader";
 
 export const ChatListPanel = () => {
     return (
@@ -10,14 +11,7 @@ export const ChatListPanel = () => {
                 "h-full"
             )}
         >
-            <div
-                className={clsx(
-                    "h-24 flex px-10 items-center bg-white-ghost",
-                    "border-b border-opacity-50 border-gray-coin"
-                )}
-            >
-                <h1 className="font-semibold text-2xl"> Messages(3)</h1>
-            </div>
+            <ChatListHeader />
             <ul className="max-h-[calc(100%-6rem)] overflow-y-scroll">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((e, key) => (
                     <li
