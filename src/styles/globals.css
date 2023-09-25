@@ -22,3 +22,7 @@ a {
 ::-webkit-scrollbar-track {
     background: #f2f1f4;
 }
+
+.ant-btn-primary {
+    background-color: #9969ff !important;
+}
