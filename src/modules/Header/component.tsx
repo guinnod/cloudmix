@@ -1,3 +1,4 @@
+import { Logo } from "@/ui/Logo";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,18 +11,7 @@ export const Header = () => {
                 "border-b border-gray-coin border-opacity-50"
             )}
         >
-            <div className="flex items-center gap-2">
-                <Image
-                    src="/icons/logo.svg"
-                    alt="cloud logo"
-                    width={42}
-                    height={42}
-                    unoptimized
-                />
-                <Link href="/" className="font-semibold text-2xl">
-                    Cloud<span className="text-primary">Mix</span>
-                </Link>
-            </div>
+            <Logo />
             <div>
                 <h2 className="font-medium text-lg">Samurai Meow</h2>
                 <Link href="/logout" className="opacity-50 line-height-lg">

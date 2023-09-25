@@ -1,4 +1,4 @@
-import { ChatBot } from "../types";
+import { ChatBot } from "../../../types";
 
 export const chat_bots: ChatBot[] = [
     {

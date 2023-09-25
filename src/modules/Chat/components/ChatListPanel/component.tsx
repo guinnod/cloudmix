@@ -20,7 +20,7 @@ export const ChatListPanel = () => {
                             "bg-opacity-70 bg-gray-cloud": e == 1,
                         })}
                     >
-                        <Link href="/">
+                        <Link href="/chat/1">
                             <ChatPreview />
                         </Link>
                     </li>
