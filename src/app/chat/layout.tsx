@@ -12,7 +12,7 @@ export default function ChatLayout({
             <Header />
             <div className="flex h-[calc(100vh-6rem)]">
                 <ChatListPanel />
-                {children}
+                <div className="overflow-y-scroll w-full">{children}</div>
             </div>
         </div>
     );

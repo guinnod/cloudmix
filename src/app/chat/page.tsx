@@ -1,5 +1,7 @@
-import { ChatWindow } from "@/modules/Chat/components/ChatWindow/component";
+"use client";
+import { CreateChatPanel } from "@/modules/Chat/components/CreateChatPanel/component";
+import React from "react";
 
 export default function ChatPage() {
-    return <ChatWindow />;
+    return <CreateChatPanel />;
 }
