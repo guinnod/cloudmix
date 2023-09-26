@@ -1,12 +1,15 @@
 "use client";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useState } from "react";
-import { login } from "@/modules/Auth/api";
-import { App } from "antd";
 import { RegisterCredentials } from "@/modules/Auth/types";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "@/modules/Auth/api";
+import { useRouter } from "next/navigation";
+import { App } from "antd";
 
 const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("Please enter your first name!"),
+    lastName: Yup.string().required("Please enter your last name!"),
     email: Yup.string()
         .email("Incorrect email format!")
         .required("Please enter your email!"),
@@ -14,26 +17,27 @@ const validationSchema = Yup.object().shape({
         .min(8, "Password length should be at least 8!")
         .max(24, "Password length should be at most 24!")
         .required("Please enter your password!"),
+    repeatPassword: Yup.string()
+        .required("Repeat password is required")
+        .test("password-match", "Passwords must match", function (value) {
+            return value === this.parent.password;
+        }),
 });
 
 export const useRegister = () => {
-    const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
+
     const { message } = App.useApp();
-    const handleSubmit = async () => {
-        setLoading(true);
-        try {
-            const { data } = await login(formik.values);
-            localStorage.setItem("access", data.access);
-        } catch (error) {
-            message.open({
-                type: "error",
-                content: "Invalid credentials",
-                duration: 3,
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
+    const mutation = useMutation(register, {
+        onSuccess(data, variables, context) {
+            message.success("Success!");
+            router.push("/login");
+        },
+        onError() {
+            message.error("Error!");
+        },
+    });
+
     const formik = useFormik<RegisterCredentials>({
         initialValues: {
             firstName: "",
@@ -45,7 +49,9 @@ export const useRegister = () => {
         validationSchema: validationSchema,
         validateOnBlur: true,
         validateOnChange: false,
-        onSubmit: handleSubmit,
+        onSubmit: () => {
+            mutation.mutateAsync(formik.values);
+        },
     });
-    return { formik, loading };
+    return { formik, mutation };
 };

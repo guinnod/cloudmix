@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useLogin } from "./hooks/useLogin";
 
 export const Login = () => {
-    const { formik, loading } = useLogin();
+    const { formik, mutation } = useLogin();
     return (
         <main className="flex flex-col h-full justify-center gap-10 items-center px-5">
             <Logo />
@@ -16,13 +16,13 @@ export const Login = () => {
                     className="flex flex-col items-center gap-2 w-full px-10"
                 >
                     <Form.Item
-                        name="email"
+                        name="username"
                         validateStatus={
-                            formik.errors.email && formik.touched.email
+                            formik.errors.username && formik.touched.username
                                 ? "error"
                                 : ""
                         }
-                        help={formik.touched.email && formik.errors.email}
+                        help={formik.touched.username && formik.errors.username}
                         className="w-full"
                     >
                         <Input
@@ -63,7 +63,8 @@ export const Login = () => {
                             htmlType="submit"
                             type="primary"
                             size={"large"}
-                            loading={loading}
+                            onClick={formik.submitForm}
+                            loading={mutation.isLoading}
                         >
                             Log in
                         </Button>

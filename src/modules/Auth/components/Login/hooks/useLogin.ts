@@ -1,47 +1,47 @@
 "use client";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { login } from "@/modules/Auth/api";
 import { App } from "antd";
+import { useMutation } from "@tanstack/react-query";
+import { LoginCredentials } from "@/modules/Auth/types";
+import { useRouter } from "next/navigation";
+import jwt from "@/lib/utils/jwt";
 
 const validationSchema = Yup.object().shape({
-    email: Yup.string()
-        .email("Incorrect email format!")
-        .required("Please enter your email!"),
-    password: Yup.string()
-        .min(8, "Password length should be at least 8!")
-        .max(24, "Password length should be at most 24!")
-        .required("Please enter your password!"),
+    username: Yup.string().required("Please enter your username!"),
+    password: Yup.string().required("Please enter your password!"),
 });
 
 export const useLogin = () => {
-    const [loading, setLoading] = useState<boolean>(false);
     const { message } = App.useApp();
-    const handleSubmit = async () => {
-        setLoading(true);
-        try {
-            const { data } = await login(formik.values);
-            localStorage.setItem("access", data.access);
-        } catch (error) {
-            message.open({
-                type: "error",
-                content: "Invalid credentials",
-                duration: 3,
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-    const formik = useFormik({
+    const router = useRouter();
+
+    const formik = useFormik<LoginCredentials>({
         initialValues: {
-            email: "",
+            username: "",
             password: "",
         },
         validationSchema: validationSchema,
         validateOnBlur: true,
         validateOnChange: false,
-        onSubmit: handleSubmit,
+        onSubmit: () => {
+            if (!mutation.isLoading) mutation.mutate(formik.values);
+        },
     });
-    return { formik, loading };
+
+    const mutation = useMutation({
+        mutationFn: login,
+        onSuccess(data, variables, context) {
+            message.success("Success!");
+            const { data: resData } = data;
+            const accessToken = resData.access;
+            jwt.saveJwt({ access: accessToken, refresh: "refresh" });
+            router.push("/chat");
+        },
+        onError() {
+            message.error("Error!");
+        },
+    });
+    return { formik, mutation };
 };

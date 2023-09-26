@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useRegister } from "./hooks/useRegister";
 
 export const Register = () => {
-    const { formik, loading } = useRegister();
+    const { formik, mutation } = useRegister();
+
     return (
         <main className="flex flex-col h-full justify-center gap-10 items-center px-5">
             <Logo />
@@ -126,7 +127,8 @@ export const Register = () => {
                             htmlType="submit"
                             type="primary"
                             size={"large"}
-                            loading={loading}
+                            loading={mutation.isLoading}
+                            onClick={formik.submitForm}
                         >
                             Register
                         </Button>
