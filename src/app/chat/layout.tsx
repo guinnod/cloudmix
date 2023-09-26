@@ -38,16 +38,16 @@ export default function ChatLayout({
     });
     if (!isAuthorized && (query.isLoading || query.isError)) {
         return (
-            <div className="w-screen h-screen fixed items-center flex justify-center">
+            <div className="w-screen h-full fixed items-center flex justify-center">
                 <Spin size="large" />
             </div>
         );
     }
 
     return (
-        <div className={clsx("h-screen w-screen fixed top-0 left-0")}>
+        <div className={clsx("h-full w-screen fixed top-0 left-0")}>
             <Header />
-            <div className="flex max-sm:h-[calc(100vh-4rem)] h-[calc(100vh-6rem)]">
+            <div className="flex max-sm:h-[calc(100%-4rem)] h-[calc(100%-6rem)]">
                 <div className={clsx({ "max-md:hidden": !isChatListOpen })}>
                     <ChatListPanel />
                 </div>
