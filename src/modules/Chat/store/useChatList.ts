@@ -1,16 +1,23 @@
 import { create } from "zustand";
 
+type ChatPreview = {
+    title: string;
+    lastMessage?: string;
+    lastMessageTime: Date;
+    id: string;
+};
+
 type State = {
-    isChatListOpen: boolean;
+    chats: ChatPreview[];
 };
 
 type Actions = {
-    openChatList: () => void;
-    closeChatList: () => void;
+    setChats: (chats: ChatPreview[]) => void;
 };
 
 export const useChatListStore = create<State & Actions>((set) => ({
-    isChatListOpen: false,
-    openChatList: () => set((state) => ({ isChatListOpen: true })),
-    closeChatList: () => set((state) => ({ isChatListOpen: false })),
+    chats: [],
+    setChats: (data: ChatPreview[]) => {
+        set((state) => ({ chats: data }));
+    },
 }));

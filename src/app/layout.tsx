@@ -4,6 +4,7 @@ import { inter } from "@/styles/fonts";
 import clsx from "clsx";
 import { AntdProvider } from "@/lib/context/antd/AntdProvider";
 import { App } from "antd";
+import { QueryProvider } from "@/lib/context/query/QueryProvider";
 
 export const metadata: Metadata = {
     title: "CloudMix",
@@ -18,9 +19,11 @@ export default function RootLayout({
     return (
         <html lang="en" className="h-full">
             <body className={clsx(inter.className, "text-black-custom h-full")}>
-                <AntdProvider>
-                    <App className="h-full">{children}</App>
-                </AntdProvider>
+                <QueryProvider>
+                    <AntdProvider>
+                        <App className="h-full">{children}</App>
+                    </AntdProvider>
+                </QueryProvider>
             </body>
         </html>
     );
