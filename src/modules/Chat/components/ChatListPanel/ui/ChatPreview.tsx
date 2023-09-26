@@ -1,6 +1,8 @@
+import { useChatListStore } from "@/modules/Chat/store/chatListStore";
 import clsx from "clsx";
 
 export const ChatPreview = () => {
+    const hideChatList = useChatListStore((state) => state.hide);
     return (
         <div
             className={clsx(
@@ -8,6 +10,7 @@ export const ChatPreview = () => {
                 "border-b border-opacity-50 border-gray-coin",
                 "w-full"
             )}
+            onClick={hideChatList}
         >
             <div className="max-w-[calc(100%-40px)] max-sm:max-w-[calc(100%-40px)]">
                 <h3 className="font-medium text-lg">Aslan</h3>
