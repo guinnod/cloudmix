@@ -8,7 +8,7 @@ export const ChatListHeader = () => {
                 "border-b border-opacity-50 border-gray-coin"
             )}
         >
-            <h1 className="font-semibold text-2xl"> Messages(3)</h1>
+            <h1 className="font-semibold text-lg sm:text-2xl"> Messages(3)</h1>
         </div>
     );
 };

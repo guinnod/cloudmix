@@ -1,9 +1,15 @@
+import { useChatListStore } from "@/modules/Chat/store/useChatList";
 import Image from "next/image";
 import Link from "next/link";
 
 export const Logo = () => {
+    const closeChatList = useChatListStore((state) => state.closeChatList);
     return (
-        <Link href="/chat" className="flex items-center gap-2">
+        <Link
+            href="/chat"
+            className="flex items-center gap-2"
+            onClick={closeChatList}
+        >
             <Image
                 className="max-sm:w-6"
                 src="/icons/logo.svg"

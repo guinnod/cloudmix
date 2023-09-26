@@ -1,10 +1,10 @@
-import { useChatListStore } from "@/modules/Chat/store/chatListStore";
 import clsx from "clsx";
 import { ArrowLeft2 } from "iconsax-react";
 import { FC } from "react";
 import { ChatHeaderProps } from "./types";
+import { useChatListStore } from "@/modules/Chat/store/useChatList";
 export const ChatHeader: FC<ChatHeaderProps> = ({ children }) => {
-    const showChatList = useChatListStore((state) => state.show);
+    const openChatList = useChatListStore((state) => state.openChatList);
     return (
         <div
             className={clsx(
@@ -15,7 +15,9 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ children }) => {
             <div className="flex items-center gap-4">
                 <ArrowLeft2
                     className="md:hidden cursor-pointer"
-                    onClick={showChatList}
+                    width={24}
+                    height={24}
+                    onClick={openChatList}
                 />
                 <div>{children}</div>
             </div>
