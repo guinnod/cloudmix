@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { LoginCredentials } from "@/modules/Auth/types";
 import { useRouter } from "next/navigation";
 import jwt from "@/lib/utils/jwt";
+import { useAuthStore } from "@/modules/Auth/store/useAuth";
 
 const validationSchema = Yup.object().shape({
     username: Yup.string().required("Please enter your username!"),
@@ -16,7 +17,7 @@ const validationSchema = Yup.object().shape({
 export const useLogin = () => {
     const { message } = App.useApp();
     const router = useRouter();
-
+    const setIsAuthorized = useAuthStore((state) => state.setIsAuthorized);
     const formik = useFormik<LoginCredentials>({
         initialValues: {
             username: "",
@@ -37,6 +38,7 @@ export const useLogin = () => {
             const { data: resData } = data;
             const accessToken = resData.access;
             jwt.saveJwt({ access: accessToken, refresh: "refresh" });
+            setIsAuthorized(true);
             router.push("/chat");
         },
         onError() {

@@ -50,7 +50,7 @@ export const useRegister = () => {
         validateOnBlur: true,
         validateOnChange: false,
         onSubmit: () => {
-            mutation.mutateAsync(formik.values);
+            if (!mutation.isLoading) mutation.mutate(formik.values);
         },
     });
     return { formik, mutation };

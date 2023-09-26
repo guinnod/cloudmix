@@ -1,23 +1,23 @@
 import { create } from "zustand";
-
-type ChatPreview = {
-    title: string;
-    lastMessage?: string;
-    lastMessageTime: Date;
-    id: string;
-};
+import { ChatPreviewType } from "../types";
 
 type State = {
-    chats: ChatPreview[];
+    chats: ChatPreviewType[];
+    activeChatId: string;
 };
 
 type Actions = {
-    setChats: (chats: ChatPreview[]) => void;
+    setChats: (chats: ChatPreviewType[]) => void;
+    setActiveChatId: (chatId: string) => void;
 };
 
 export const useChatListStore = create<State & Actions>((set) => ({
     chats: [],
-    setChats: (data: ChatPreview[]) => {
-        set((state) => ({ chats: data }));
+    setChats: (data: ChatPreviewType[]) => {
+        set((state) => ({ ...state, chats: data }));
+    },
+    activeChatId: "",
+    setActiveChatId: (chatId: string) => {
+        set((state) => ({ ...state, activeChatId: chatId }));
     },
 }));
