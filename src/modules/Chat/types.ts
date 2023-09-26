@@ -5,3 +5,6 @@ export interface ChatBot {
     description: string;
     link: string;
 }
+export interface ChatHeaderProps {
+    children: React.ReactNode;
+}

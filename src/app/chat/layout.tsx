@@ -1,36 +1,42 @@
 "use client";
 import clsx from "clsx";
-import { Header } from "@/modules/Header/component";
+import { Header } from "@/modules/Layout/components/Header/component";
 import { ChatListPanel } from "@/modules/Chat/components/ChatListPanel/component";
 import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 import { useQuery } from "@tanstack/react-query";
 import { Spin } from "antd";
 import { useRouter } from "next/navigation";
+import { verify } from "@/modules/Auth/api";
+import { useAuthStore } from "@/modules/Auth/store/useAuth";
 export default function ChatLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const isAuthorized = useAuthStore((state) => state.isAuthorized);
+    const setIsAuthorized = useAuthStore((state) => state.setIsAuthorized);
     const router = useRouter();
     const isChatListOpen = useChatListRenderStore(
         (state) => state.isChatListOpen
     );
     const checkAuthorize = async () => {
-        await new Promise<void>((resolve, reject) => {
-            setTimeout(() => {
-                reject();
-            }, 500);
-        });
+        return await verify();
     };
     const query = useQuery({
         queryKey: ["authorize"],
         queryFn: checkAuthorize,
-        onError: () => {
+        onError: (error) => {
+            console.log(error);
+
             router.push("/login");
         },
+        onSuccess: () => {
+            setIsAuthorized(true);
+        },
         retry: false,
+        enabled: !isAuthorized,
     });
-    if (query.isLoading || query.isError) {
+    if (!isAuthorized && (query.isLoading || query.isError)) {
         return (
             <div className="w-screen h-screen fixed items-center flex justify-center">
                 <Spin size="large" />

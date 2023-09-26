@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { chat_bots } from "./consts/chat-bots";
 import { ChatBotCard } from "./ui/ChatBotCard";
-import { ChatHeader } from "@/ui/ChatHeader";
+import { ChatHeader } from "@/modules/Chat/components/ChatWindow/ui/ChatHeader";
 
 export const CreateChatPanel = () => {
     return (

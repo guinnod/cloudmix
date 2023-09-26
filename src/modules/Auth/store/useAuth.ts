@@ -1,9 +1,5 @@
 import { create } from "zustand";
-
-interface User {
-    firstName: string;
-    lastName: string;
-}
+import { User } from "@/lib/types/user";
 
 interface State {
     isAuthorized: boolean;
@@ -15,7 +11,7 @@ type Actions = {
     setUser: (user: User) => void;
 };
 
-export const useChatListStore = create<State & Actions>((set) => ({
+export const useAuthStore = create<State & Actions>((set) => ({
     isAuthorized: false,
     user: null,
     setIsAuthorized: (isAuthorized: boolean) => {

@@ -4,8 +4,10 @@ import {
     configureRefreshRetry,
 } from "./helper";
 
-const axios = createAxiosWithBaseUrl("");
-const axiosAuthorized = createAxiosWithBaseUrl("");
+const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
+
+const axios = createAxiosWithBaseUrl(baseUrl);
+const axiosAuthorized = createAxiosWithBaseUrl(baseUrl);
 
 applyJwtAuth(axiosAuthorized);
 configureRefreshRetry(axiosAuthorized);

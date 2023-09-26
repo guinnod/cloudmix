@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { MessageComposer } from "./ui/MessageComposer";
-import { ChatHeader } from "../../../../ui/ChatHeader";
+import { ChatHeader } from "./ui/ChatHeader";
 import { MessagesList } from "./ui/MessagesList";
 
 export const ChatWindow = () => {
