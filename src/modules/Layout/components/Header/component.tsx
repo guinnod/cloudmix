@@ -1,8 +1,19 @@
+import jwt from "@/lib/utils/jwt";
+import { useAuthStore } from "@/modules/Auth/store/useAuth";
 import { Logo } from "@/ui/Logo";
 import clsx from "clsx";
-import Link from "next/link";
+import { useEffect } from "react";
 
 export const Header = () => {
+    const setIsAuthorized = useAuthStore((state) => state.setIsAuthorized);
+    const isAuthorized = useAuthStore((state) => state.isAuthorized);
+    useEffect(() => {
+        console.log(isAuthorized);
+    }, [isAuthorized]);
+    const logout = () => {
+        jwt.clearJwt();
+        setIsAuthorized(false);
+    };
     return (
         <header
             className={clsx(
@@ -13,9 +24,13 @@ export const Header = () => {
             <Logo />
             <div>
                 <h2 className="font-medium sm:text-lg">Samurai Meow</h2>
-                <Link href="/logout" className="opacity-50 sm:line-height-lg">
+                <a
+                    href="/login"
+                    onClick={logout}
+                    className="opacity-50 sm:line-height-lg"
+                >
                     Logout
-                </Link>
+                </a>
             </div>
         </header>
     );

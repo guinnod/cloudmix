@@ -1,14 +1,13 @@
 "use client";
 import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 import Image from "next/image";
-import Link from "next/link";
 
 export const Logo = () => {
     const closeChatList = useChatListRenderStore(
         (state) => state.closeChatList
     );
     return (
-        <Link
+        <a
             href="/chat"
             className="flex items-center gap-2"
             onClick={closeChatList}
@@ -24,6 +23,6 @@ export const Logo = () => {
             <span className="font-semibold text-xl sm:text-2xl max-[260px]:hidden">
                 Cloud<span className="text-primary">Mix</span>
             </span>
-        </Link>
+        </a>
     );
 };
