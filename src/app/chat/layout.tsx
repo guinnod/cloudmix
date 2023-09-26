@@ -2,14 +2,16 @@
 import clsx from "clsx";
 import { Header } from "@/modules/Header/component";
 import { ChatListPanel } from "@/modules/Chat/components/ChatListPanel/component";
-import { useChatListStore } from "@/modules/Chat/store/useChatList";
+import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 
 export default function ChatLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const isChatListOpen = useChatListStore((state) => state.isChatListOpen);
+    const isChatListOpen = useChatListRenderStore(
+        (state) => state.isChatListOpen
+    );
     return (
         <div className={clsx("h-screen w-screen fixed top-0 left-0")}>
             <Header />

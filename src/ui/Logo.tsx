@@ -1,9 +1,11 @@
-import { useChatListStore } from "@/modules/Chat/store/useChatList";
+import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 import Image from "next/image";
 import Link from "next/link";
 
 export const Logo = () => {
-    const closeChatList = useChatListStore((state) => state.closeChatList);
+    const closeChatList = useChatListRenderStore(
+        (state) => state.closeChatList
+    );
     return (
         <Link
             href="/chat"

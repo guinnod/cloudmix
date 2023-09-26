@@ -2,9 +2,9 @@ import clsx from "clsx";
 import { ArrowLeft2 } from "iconsax-react";
 import { FC } from "react";
 import { ChatHeaderProps } from "./types";
-import { useChatListStore } from "@/modules/Chat/store/useChatList";
+import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 export const ChatHeader: FC<ChatHeaderProps> = ({ children }) => {
-    const openChatList = useChatListStore((state) => state.openChatList);
+    const openChatList = useChatListRenderStore((state) => state.openChatList);
     return (
         <div
             className={clsx(

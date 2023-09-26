@@ -2,14 +2,18 @@ import clsx from "clsx";
 import Link from "next/link";
 import { ChatPreview } from "./ui/ChatPreview";
 import { ChatListHeader } from "./ui/ChatListHeader";
-import { useChatListStore } from "../../store/useChatList";
+import { useChatListRenderStore } from "../../store/useChatListRender";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
 
 export const ChatListPanel = () => {
-    const closeChatList = useChatListStore((state) => state.closeChatList);
-    const isChatListOpen = useChatListStore((state) => state.isChatListOpen);
+    const closeChatList = useChatListRenderStore(
+        (state) => state.closeChatList
+    );
+    const isChatListOpen = useChatListRenderStore(
+        (state) => state.isChatListOpen
+    );
     const isMdScreen = useMediaQuery({ maxWidth: 768 });
 
     return (
