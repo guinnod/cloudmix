@@ -5,8 +5,8 @@ type State = {
 };
 
 type Actions = {
-    show?: () => void;
-    hide?: () => void;
+    show: () => void;
+    hide: () => void;
 };
 
 export const useChatListStore = create<State & Actions>((set) => ({

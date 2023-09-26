@@ -1,7 +1,9 @@
 import { useChatListStore } from "@/modules/Chat/store/chatListStore";
 import clsx from "clsx";
 import { ArrowLeft2 } from "iconsax-react";
-export const ChatHeader = () => {
+import { FC } from "react";
+import { ChatHeaderProps } from "./types";
+export const ChatHeader: FC<ChatHeaderProps> = ({ children }) => {
     const showChatList = useChatListStore((state) => state.show);
     return (
         <div
@@ -15,10 +17,7 @@ export const ChatHeader = () => {
                     className="md:hidden cursor-pointer"
                     onClick={showChatList}
                 />
-                <div>
-                    <h2 className="text-lg font-medium">Aslan</h2>
-                    <p className="opacity-50">Online</p>
-                </div>
+                <div>{children}</div>
             </div>
         </div>
     );

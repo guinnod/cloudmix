@@ -16,7 +16,6 @@ export const ChatBotCard: FC<ChatBot> = ({
 }) => {
     return (
         <Card
-            // style={{ width: 280 }}
             className="w-[280px] max-sm:max-w-[90vw]"
             cover={
                 <Image
