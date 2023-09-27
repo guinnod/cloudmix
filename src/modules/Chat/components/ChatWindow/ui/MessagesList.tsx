@@ -36,6 +36,20 @@ export const MessagesList = ({ messages }: { messages: MessageType[] }) => {
                     <>
                         <TimeDivider time={key} key={key} />
                         {groupedMessages[key].map((message, subIndex) => {
+                            if (
+                                message.content?.startsWith(
+                                    "https://storage.googleapis.com/jasaw"
+                                )
+                            ) {
+                                return (
+                                    <div className="w-250 h-180 self-end">
+                                        <img
+                                            src={message.content}
+                                            alt="image"
+                                        />
+                                    </div>
+                                );
+                            }
                             return (
                                 <Message
                                     key={`${key}+${subIndex}`}

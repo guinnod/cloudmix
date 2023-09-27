@@ -24,7 +24,7 @@ export const Message: FC<MessageComponentProps> = ({
         >
             <div
                 className={clsx(
-                    "rounded-2xl py-3 px-6 w-max max-w-[min(90%,24rem)] max-sm:max-w-[min(80vw,20rem)]",
+                    "rounded-2xl py-3 px-6 w-max max-w-[min(90%,24rem)] max-sm:max-w-[min(80vw,20rem)] break-words",
                     `${
                         isOwnMessage
                             ? "bg-primary text-white-default"

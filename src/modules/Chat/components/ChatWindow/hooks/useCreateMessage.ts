@@ -1,11 +1,15 @@
+import { axiosAuthorized } from "@/lib/config/axios";
 import { sendMessage } from "@/modules/Chat/api";
 import { useChatStore } from "@/modules/Chat/store/useChat";
 import { MessageType } from "@/modules/Chat/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
+import { App } from "antd";
+import { useState } from "react";
 
 export const useCreateMessage = ({ chatId }: { chatId: string }) => {
     const [messageValue, setMessageValue] = useState<string>("");
+    const [fileList, setFileList] = useState<any>([]);
+    const { message: messageApi } = App.useApp();
     const addMessage = useChatStore((state) => state.addMessage);
     const queryClient = useQueryClient();
     const createMessage = (): MessageType => {
@@ -17,7 +21,33 @@ export const useCreateMessage = ({ chatId }: { chatId: string }) => {
             type: "message",
         };
     };
+    const customRequest = async (options: any) => {
+        const { onSuccess, onError, file, onProgress } = options;
 
+        const formData = new FormData();
+        const config = {
+            headers: { "content-type": "multipart/form-data" },
+            onUploadProgress: (event: any) => {
+                onProgress({ percent: (event.loaded / event.total) * 100 });
+            },
+        };
+        try {
+            formData.append("image", file);
+            const res = await axiosAuthorized.post(
+                "/api/chat-image/",
+                formData,
+                config
+            );
+            const raw = createMessage();
+            raw.content = res?.data?.image;
+            raw.type = "image";
+            mutation.mutate(raw);
+            onSuccess(res);
+        } catch (err) {
+            messageApi.error("Something went wrong!");
+            onError({ err });
+        }
+    };
     const mutation = useMutation({
         mutationFn: (data: MessageType) => {
             setMessageValue("");
@@ -32,5 +62,13 @@ export const useCreateMessage = ({ chatId }: { chatId: string }) => {
         },
         retry: false,
     });
-    return { mutation, messageValue, setMessageValue, createMessage };
+    return {
+        mutation,
+        messageValue,
+        setMessageValue,
+        createMessage,
+        fileList,
+        setFileList,
+        customRequest,
+    };
 };
