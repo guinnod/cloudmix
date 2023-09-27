@@ -4,6 +4,7 @@ import { Message } from "./Message";
 import { MessageType } from "@/modules/Chat/types";
 import { groupTimestamps } from "@/lib/utils/time";
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 
 export const MessagesList = ({ messages }: { messages: MessageType[] }) => {
     const [groupedMessages, setGroupedMessages] = useState<{
@@ -42,10 +43,15 @@ export const MessagesList = ({ messages }: { messages: MessageType[] }) => {
                                 )
                             ) {
                                 return (
-                                    <div className="w-250 h-180 self-end">
-                                        <img
+                                    <div
+                                        key={`${key}+${subIndex}`}
+                                        className="w-250 h-180 self-end"
+                                    >
+                                        <Image
                                             src={message.content}
                                             alt="image"
+                                            width={250}
+                                            height={180}
                                         />
                                     </div>
                                 );
