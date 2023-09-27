@@ -1,4 +1,22 @@
+# Next.js Chat App
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Installation
+
+c1. cd your-repo
+npm install
+
+## Config
+
+Before running this project, you need to set up environment variables by creating a `.env` file in the root directory. These environment variables are used to manage sensitive information such as secret keys.
+
+Create a `.env` file and add the following variables with your own values:
+
+````env
+SECRET_KEY=your_secret_key_here
+ANOTHER_SECRET_KEY=another_secret_key_here
+# Add more environment variables as needed
 
 ## Getting Started
 
@@ -6,31 +24,32 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Description
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This Next.js project is a chat application with a modular architecture, incorporating various technologies and features.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- **User Authentication:** Users can register or log in to the application to access its features.
 
-To learn more about Next.js, take a look at the following resources:
+- **Main Page with Chat Creation:** After logging in, users are presented with the main page, where they can create chats with unique names.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Chat Options:**
+  1. **ChatGPT:** A chatbot that interacts with users using natural language.
+  2. **Image Chat:** Users can send images, and Google Lens will provide results based on the images.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Project Description
 
-## Deploy on Vercel
+This Next.js project is a chat application with a modular architecture, incorporating various technologies and features, including:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Tailwind CSS:** Used for styling to create a sleek and responsive user interface.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Ant Design:** Incorporates Ant Design for UI components, enhancing the look and feel of the application.
+
+- **Next.js App Router:** Utilizes the new routing system introduced by Next.js for improved performance and SEO benefits.
+
+- **React Query:** Employs React Query for efficient data fetching and management, ensuring a smooth user experience.
+
+- **Zustand:** Leverages Zustand for state management, simplifying the handling of application-wide and component-specific state.
+````
