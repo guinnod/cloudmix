@@ -52,33 +52,39 @@ export const ChatListPanel = () => {
             >
                 <ChatListHeader chatsLength={chats.length} />
                 <ul className="max-sm:max-h-[calc(100%-4rem)] max-h-[calc(100%-6rem)] overflow-y-scroll w-full">
-                    {chats.map((e, key) => (
-                        <li
-                            key={key}
-                            className={clsx(
-                                {
-                                    "bg-opacity-70 bg-gray-cloud":
-                                        e.id === activeChatId,
-                                },
-                                "w-full"
-                            )}
-                        >
-                            <Link
-                                href={`/chat/${e.id}`}
-                                onClick={() => {
-                                    setActiveChatId(e.id);
-                                    setActiveChatName(e.name);
-                                    setMessages([]);
-                                    setTimeout(() => {
-                                        closeChatList();
-                                    }, 500);
-                                }}
-                                className="w-full"
+                    {chats
+                        .sort(
+                            (a, b) =>
+                                (b.last_message?.time || 0) -
+                                (a.last_message?.time || 0)
+                        )
+                        .map((e, key) => (
+                            <li
+                                key={key}
+                                className={clsx(
+                                    {
+                                        "bg-opacity-70 bg-gray-cloud":
+                                            e.id === activeChatId,
+                                    },
+                                    "w-full"
+                                )}
                             >
-                                <ChatPreview {...e} />
-                            </Link>
-                        </li>
-                    ))}
+                                <Link
+                                    href={`/chat/${e.id}`}
+                                    onClick={() => {
+                                        setActiveChatId(e.id);
+                                        setActiveChatName(e.name);
+                                        setMessages([]);
+                                        setTimeout(() => {
+                                            closeChatList();
+                                        }, 500);
+                                    }}
+                                    className="w-full"
+                                >
+                                    <ChatPreview {...e} />
+                                </Link>
+                            </li>
+                        ))}
                     <div className="w-[448px]" />
                 </ul>
             </nav>

@@ -17,7 +17,10 @@ export const Message: FC<MessageComponentProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.5 }}
-            className={clsx("w-max", { "self-end": isOwnMessage })}
+            className={clsx(
+                "w-max max-w-[min(90%,24rem)] max-sm:max-w-[min(80vw,20rem)]",
+                { "self-end": isOwnMessage }
+            )}
         >
             <div
                 className={clsx(

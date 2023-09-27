@@ -15,7 +15,7 @@ export const CreateChatPanel = () => {
             </div>
             <ul
                 className={clsx(
-                    "py-10 grid min-[1320px]:grid-cols-3 gap-5 min-[1050px]:grid-cols-2 max-sm:px-5"
+                    "py-10 grid min-[1320px]:grid-cols-2 gap-5 min-[1050px]:grid-cols-2 max-sm:px-5"
                 )}
             >
                 {chat_bots.map((data, key) => (
