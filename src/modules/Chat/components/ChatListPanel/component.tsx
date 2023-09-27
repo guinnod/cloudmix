@@ -9,6 +9,7 @@ import { useChatListStore } from "../../store/useChatList";
 import { useQuery } from "@tanstack/react-query";
 import { getChatList } from "../../api";
 import { AxiosResponse } from "axios";
+import { useChatStore } from "../../store/useChat";
 
 export const ChatListPanel = () => {
     const { isChatListOpen, closeChatList } = useChatListRenderStore(
@@ -23,7 +24,7 @@ export const ChatListPanel = () => {
         setActiveChatName,
     } = useChatListStore((state) => state);
     const isMdScreen = useMediaQuery({ maxWidth: 768 });
-
+    const setMessages = useChatStore((state) => state.setMessages);
     const query = useQuery({
         queryKey: ["chatList"],
         queryFn: getChatList,
@@ -67,6 +68,7 @@ export const ChatListPanel = () => {
                                 onClick={() => {
                                     setActiveChatId(e.id);
                                     setActiveChatName(e.name);
+                                    setMessages([]);
                                     setTimeout(() => {
                                         closeChatList();
                                     }, 500);
