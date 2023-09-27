@@ -3,7 +3,7 @@ import { MessageType } from "./types";
 import axios from "axios";
 
 export const getChatList = () => {
-    return axiosAuthorized.get("api/chats/");
+    return axiosAuthorized.get("api/chat/");
 };
 
 export const getChat = (chatId: string) => {
@@ -11,6 +11,12 @@ export const getChat = (chatId: string) => {
 };
 
 export const sendMessage = (message: MessageType) => {
-    return axios.post("https://jsonplaceholder.typicode.com/todos/1", message);
-    return axiosAuthorized.post(`api/message/`, message);
+    return axiosAuthorized.post(
+        `api/chat/${message.chatId}/?type=${message.type}`,
+        message
+    );
+};
+
+export const createChat = (data: object) => {
+    return axiosAuthorized.post(`api/chat/`, data);
 };

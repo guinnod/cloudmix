@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import { App } from "antd";
 
 const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Please enter your first name!"),
-    lastName: Yup.string().required("Please enter your last name!"),
+    first_name: Yup.string().required("Please enter your first name!"),
+    last_name: Yup.string().required("Please enter your last name!"),
     email: Yup.string()
         .email("Incorrect email format!")
         .required("Please enter your email!"),
@@ -28,7 +28,8 @@ export const useRegister = () => {
     const router = useRouter();
 
     const { message } = App.useApp();
-    const mutation = useMutation(register, {
+    const mutation = useMutation({
+        mutationFn: register,
         onSuccess(data, variables, context) {
             message.success("Success!");
             router.push("/login");
@@ -40,8 +41,8 @@ export const useRegister = () => {
 
     const formik = useFormik<RegisterCredentials>({
         initialValues: {
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
             email: "",
             password: "",
             repeatPassword: "",

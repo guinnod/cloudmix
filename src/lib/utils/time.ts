@@ -26,7 +26,7 @@ export const groupTimestamps = (
     const groupedByDate: { [key: string]: MessageType[] } = {};
 
     data.forEach((item) => {
-        const timestamp = new Date(item.timeStamp);
+        const timestamp = new Date(item.time);
         const dateString = timestamp.toISOString().split("T")[0];
 
         if (!groupedByDate[dateString]) {
@@ -37,7 +37,7 @@ export const groupTimestamps = (
     });
     const todaysDate = new Date(Date.now()).toISOString().split("T")[0];
     groupedByDate[todaysDate]?.forEach((item: MessageType) => {
-        const timestamp = new Date(item.timeStamp);
+        const timestamp = new Date(item.time);
         const key = timestamp.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",

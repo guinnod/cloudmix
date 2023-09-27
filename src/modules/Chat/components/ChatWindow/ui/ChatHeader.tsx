@@ -5,6 +5,7 @@ import { ChatHeaderProps } from "@/modules/Chat/types";
 import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 export const ChatHeader: FC<ChatHeaderProps> = ({ children }) => {
     const openChatList = useChatListRenderStore((state) => state.openChatList);
+
     return (
         <div
             className={clsx(

@@ -5,14 +5,16 @@ import clsx from "clsx";
 import { useEffect } from "react";
 
 export const Header = () => {
-    const setIsAuthorized = useAuthStore((state) => state.setIsAuthorized);
-    const isAuthorized = useAuthStore((state) => state.isAuthorized);
+    const { setIsAuthorized, isAuthorized, user, setUser } = useAuthStore(
+        (state) => state
+    );
     useEffect(() => {
         console.log(isAuthorized);
     }, [isAuthorized]);
     const logout = () => {
         jwt.clearJwt();
         setIsAuthorized(false);
+        setUser(null);
     };
     return (
         <header
@@ -23,7 +25,7 @@ export const Header = () => {
         >
             <Logo />
             <div>
-                <h2 className="font-medium sm:text-lg">Samurai Meow</h2>
+                <h2 className="font-medium sm:text-lg">{`${user?.first_name} ${user?.last_name}`}</h2>
                 <a
                     href="/login"
                     onClick={logout}

@@ -3,44 +3,24 @@ import { TimeDivider } from "./TimeDivider";
 import { Message } from "./Message";
 import { MessageType } from "@/modules/Chat/types";
 import { groupTimestamps } from "@/lib/utils/time";
-import { useState } from "react";
-const mockData: MessageType[] = [
-    {
-        content: "Hello",
-        timeStamp: 1634320500000,
-        senderId: "USER",
-        chatId: "abc123",
-    },
-    {
-        content: "Hi there!",
-        timeStamp: 1634320560000,
-        senderId: "CHAT",
-        chatId: "abc123",
-    },
-    {
-        content: "How are you?",
-        timeStamp: 1634320620000,
-        senderId: "USER",
-        chatId: "abc123",
-    },
-    {
-        content: "I'm good, thanks!",
-        timeStamp: 1634320680000,
-        senderId: "CHAT",
-        chatId: "abc123",
-    },
-    {
-        content: "What about you?",
-        timeStamp: 1695759693951,
-        senderId: "USER",
-        chatId: "abc123",
-    },
-];
+import { useRef, useState, useEffect } from "react";
 
 export const MessagesList = ({ messages }: { messages: MessageType[] }) => {
-    const [groupedMessages] = useState<{
+    const [groupedMessages, setGroupedMessages] = useState<{
         [key: string]: MessageType[];
-    }>(groupTimestamps(mockData));
+    }>(groupTimestamps([]));
+    useEffect(() => {
+        setGroupedMessages(groupTimestamps(messages));
+    }, [messages]);
+    const listButtomRef = useRef(null);
+    useEffect(() => {
+        setTimeout(() => {
+            //@ts-ignore
+            listButtomRef?.current?.scrollIntoView({
+                behavior: "smooth",
+            });
+        }, 150);
+    }, [messages]);
     return (
         <section
             className={clsx(
@@ -58,8 +38,8 @@ export const MessagesList = ({ messages }: { messages: MessageType[] }) => {
                         {groupedMessages[key].map((message, subIndex) => {
                             return (
                                 <Message
-                                    key={`${key}-${subIndex}`}
-                                    isOwnMessage={message.senderId === "USER"}
+                                    key={`${key}+${subIndex}`}
+                                    isOwnMessage={message.role === "user"}
                                 >
                                     {message.content}
                                 </Message>
@@ -68,6 +48,7 @@ export const MessagesList = ({ messages }: { messages: MessageType[] }) => {
                     </>
                 );
             })}
+            <div ref={listButtomRef} key={"div"}></div>
         </section>
     );
 };

@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import { FC, ReactNode } from "react";
 
 interface MessageComponentProps {
@@ -11,17 +12,25 @@ export const Message: FC<MessageComponentProps> = ({
     children,
 }) => {
     return (
-        <div
-            className={clsx(
-                "rounded-2xl py-3 px-6 w-max max-w-[min(90%,24rem)] max-sm:max-w-[min(80vw,20rem)]",
-                `${
-                    isOwnMessage
-                        ? "bg-primary text-white-default self-end"
-                        : "bg-white-default"
-                }`
-            )}
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
+            className={clsx("w-max", { "self-end": isOwnMessage })}
         >
-            {children}
-        </div>
+            <div
+                className={clsx(
+                    "rounded-2xl py-3 px-6 w-max max-w-[min(90%,24rem)] max-sm:max-w-[min(80vw,20rem)]",
+                    `${
+                        isOwnMessage
+                            ? "bg-primary text-white-default"
+                            : "bg-white-default"
+                    }`
+                )}
+            >
+                {children}
+            </div>
+        </motion.div>
     );
 };

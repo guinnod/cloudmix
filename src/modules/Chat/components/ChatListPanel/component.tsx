@@ -8,24 +8,31 @@ import { useMediaQuery } from "react-responsive";
 import { useChatListStore } from "../../store/useChatList";
 import { useQuery } from "@tanstack/react-query";
 import { getChatList } from "../../api";
+import { AxiosResponse } from "axios";
 
 export const ChatListPanel = () => {
     const { isChatListOpen, closeChatList } = useChatListRenderStore(
         (state) => state
     );
 
-    const { chats, activeChatId, setActiveChatId, setChats } = useChatListStore(
-        (state) => state
-    );
+    const {
+        chats,
+        activeChatId,
+        setActiveChatId,
+        setChats,
+        setActiveChatName,
+    } = useChatListStore((state) => state);
     const isMdScreen = useMediaQuery({ maxWidth: 768 });
 
     const query = useQuery({
         queryKey: ["chatList"],
         queryFn: getChatList,
-        onSuccess: (data: any) => {
+        onSuccess: (response: AxiosResponse) => {
+            const { data } = response;
             setChats(data);
         },
         retry: false,
+        refetchInterval: 3000,
     });
     return (
         <motion.div
@@ -59,6 +66,7 @@ export const ChatListPanel = () => {
                                 href={`/chat/${e.id}`}
                                 onClick={() => {
                                     setActiveChatId(e.id);
+                                    setActiveChatName(e.name);
                                     setTimeout(() => {
                                         closeChatList();
                                     }, 500);

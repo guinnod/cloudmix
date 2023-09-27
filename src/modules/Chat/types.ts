@@ -12,14 +12,15 @@ export interface ChatHeaderProps {
 export interface MessageType {
     isRead?: boolean;
     content: string;
-    timeStamp: number;
-    senderId?: string;
+    time: number;
+    role?: string;
     chatId: string;
+    type: "message" | "image";
 }
 
 export interface ChatPreviewType {
-    title: string;
-    message?: MessageType;
+    name: string;
+    last_message?: MessageType;
     id: string;
 }
 

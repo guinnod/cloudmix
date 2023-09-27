@@ -6,32 +6,33 @@ import { useChatListRenderStore } from "@/modules/Chat/store/useChatListRender";
 import { useQuery } from "@tanstack/react-query";
 import { Spin } from "antd";
 import { useRouter } from "next/navigation";
-import { verify } from "@/modules/Auth/api";
+import { getUser } from "@/modules/Auth/api";
 import { useAuthStore } from "@/modules/Auth/store/useAuth";
+import { AxiosResponse } from "axios";
+import { User } from "@/lib/types/user";
 export default function ChatLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const isAuthorized = useAuthStore((state) => state.isAuthorized);
-    const setIsAuthorized = useAuthStore((state) => state.setIsAuthorized);
+    const { isAuthorized, setIsAuthorized, setUser } = useAuthStore(
+        (state) => state
+    );
     const router = useRouter();
     const isChatListOpen = useChatListRenderStore(
         (state) => state.isChatListOpen
     );
-    const checkAuthorize = async () => {
-        return await verify();
-    };
+
     const query = useQuery({
         queryKey: ["authorize"],
-        queryFn: checkAuthorize,
+        queryFn: getUser,
         onError: (error) => {
-            console.log(error);
-
             router.push("/login");
         },
-        onSuccess: () => {
+        onSuccess: (response: AxiosResponse<User>) => {
             setIsAuthorized(true);
+            const { data } = response;
+            setUser(data);
         },
         retry: false,
         enabled: !isAuthorized,

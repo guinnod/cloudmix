@@ -2,7 +2,7 @@ import { formatTime } from "@/lib/utils/time";
 import { ChatPreviewType } from "@/modules/Chat/types";
 import clsx from "clsx";
 import { FC } from "react";
-export const ChatPreview: FC<ChatPreviewType> = ({ message, title }) => {
+export const ChatPreview: FC<ChatPreviewType> = ({ last_message, name }) => {
     return (
         <div
             className={clsx(
@@ -12,9 +12,9 @@ export const ChatPreview: FC<ChatPreviewType> = ({ message, title }) => {
             )}
         >
             <div className="max-w-[calc(100%-40px)] max-sm:max-w-[calc(100%-40px)]">
-                <h3 className="font-medium text-lg">{title}</h3>
-                <p className="opacity-50 whitespace-nowrap overflow-hidden overflow-ellipsis">
-                    {message?.content}
+                <h3 className="font-medium text-lg h-[28px]">{name}</h3>
+                <p className="opacity-50 whitespace-nowrap overflow-hidden overflow-ellipsis h-[24px]">
+                    {last_message?.content}
                 </p>
             </div>
             <div className="flex flex-col items-center gap-2">
@@ -22,13 +22,13 @@ export const ChatPreview: FC<ChatPreviewType> = ({ message, title }) => {
                     className={clsx(
                         "text-sm text-white-default",
                         "rounded-full bg-primary w-6 h-6 flex items-center justify-center",
-                        { "opacity-0": !message || message.isRead }
+                        { "opacity-0": !last_message || last_message.isRead }
                     )}
                 >
                     1
                 </div>
                 <time className="text-sm opacity-60">
-                    {message?.timeStamp && formatTime(message.timeStamp)}
+                    {last_message?.time && formatTime(last_message.time)}
                 </time>
             </div>
         </div>

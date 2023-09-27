@@ -17,14 +17,16 @@ export const Register = () => {
                     className="flex flex-col items-center gap-2 w-full px-10"
                 >
                     <Form.Item
-                        name="firstName"
+                        name="first_name"
                         validateStatus={
-                            formik.errors.firstName && formik.touched.firstName
+                            formik.errors.first_name &&
+                            formik.touched.first_name
                                 ? "error"
                                 : ""
                         }
                         help={
-                            formik.touched.firstName && formik.errors.firstName
+                            formik.touched.first_name &&
+                            formik.errors.first_name
                         }
                         className="w-full"
                     >
@@ -38,13 +40,15 @@ export const Register = () => {
                         />
                     </Form.Item>
                     <Form.Item
-                        name="lastName"
+                        name="last_name"
                         validateStatus={
-                            formik.errors.lastName && formik.touched.lastName
+                            formik.errors.last_name && formik.touched.last_name
                                 ? "error"
                                 : ""
                         }
-                        help={formik.touched.lastName && formik.errors.lastName}
+                        help={
+                            formik.touched.last_name && formik.errors.last_name
+                        }
                         className="w-full"
                     >
                         <Input
